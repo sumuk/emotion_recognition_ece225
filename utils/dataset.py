@@ -1,6 +1,5 @@
 import os
 import glob
-from typing import List
 import numpy as np
 import random
 from multiprocessing.pool import ThreadPool
