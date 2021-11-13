@@ -50,4 +50,4 @@ for emotion in os.listdir(args.input_folder_path):
     if not os.path.isdir(output_folder):
         os.makedirs(output_folder)
     process_audio(os.path.join(args.input_folder_path,emotion),output_folder)
-    
+

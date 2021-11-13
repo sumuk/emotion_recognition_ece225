@@ -15,7 +15,7 @@ class Emotion():
             data = np.load(file)
             self.size[file_no]= (file,data.shape[1])
         self.total_size = len(self.size)
-        print("Done loading the {0} class".format(os.path.split(folder_path)[-1]))
+        #print("Done loading the {0} class".format(os.path.split(folder_path)[-1]))
     
     def __len__(self):
         return len(self.size)
