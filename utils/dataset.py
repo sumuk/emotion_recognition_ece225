@@ -27,7 +27,7 @@ class Emotion():
         for i in out:
             array.append(np.load(i[0]))
             length.append(i[1])
-        return (array,[self.label]*emotion_samples,length)
+        return (np.vstack(array),[self.label]*emotion_samples,length)
 
 class Audiodataset():
     '''
@@ -48,7 +48,7 @@ class Audiodataset():
         return self.labels
 
     def __len__(self):
-        return sum([len(i) for i in self.emotions])//self.sample_per_emotion
+        return max(1,sum([len(i) for i in self.emotions])//(self.sample_per_emotion*len(self.emotions)))
 
     def __getitem__ (self,idx):
         '''
@@ -65,7 +65,9 @@ class Audiodataset():
         for i in t:
             length.extend(i[2])
             labels.extend(i[1])
-        data = np.vstack([np.pad(j,[(0,0),(0,max_len-le),(0,0)],'constant',constant_values=(0,0)) for j,le in zip(i[0],i[2]) for i in t])
+            
+        data = np.vstack([i[0] for i in t])
+        #np.vstack([np.pad(j,[(0,0),(0,max_len-le),(0,0)],'constant',constant_values=(0,0)) for j,le in zip(i[0],i[2]) for i in t])
         return (data,np.array(labels),np.array(length))  
 
 
